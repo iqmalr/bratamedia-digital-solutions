@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale, type Locale } from "@/i18n/index";
+import { Hero } from "@/app/components/hero";
+import { ServicesSection } from "@/app/components/services";
 
 export default async function HomePage(props: PageProps<"/[lang]">) {
   const { lang } = await props.params;
@@ -17,10 +19,9 @@ export default async function HomePage(props: PageProps<"/[lang]">) {
        *
        * The <main> wrapper lives in [lang]/layout.tsx.
        */}
-      <section id="hero" aria-label={dict.hero.headline} className="px-4 py-24 sm:px-6 lg:px-8">
-        <h1>{dict.hero.headline}</h1>
-        <p>{dict.hero.subheadline}</p>
-      </section>
+      <Hero dictionary={dict.hero} />
+
+      <ServicesSection dictionary={dict} locale={lang as Locale} />
     </>
   );
 }
