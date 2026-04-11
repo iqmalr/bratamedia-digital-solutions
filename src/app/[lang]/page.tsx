@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
 import { getDictionary, hasLocale, type Locale } from "@/i18n/index";
+import { getServices } from "@/lib/actions/services";
+import { getPortfolioItems } from "@/lib/actions/portfolio";
+import { getTestimonials } from "@/lib/actions/testimonials";
 import { Hero } from "@/app/components/hero";
 import { ServicesSection } from "@/app/components/services";
 import { PortfolioSection } from "@/app/components/portfolio";
@@ -11,14 +14,26 @@ export default async function HomePage(props: PageProps<"/[lang]">) {
 
   if (!hasLocale(lang)) notFound();
 
-  const dict = await getDictionary(lang as Locale);
+  const locale = lang as Locale;
+
+  const [dict, servicesResult, portfolioResult, testimonialsResult] =
+    await Promise.all([
+      getDictionary(locale),
+      getServices(locale),
+      getPortfolioItems(locale),
+      getTestimonials(locale),
+    ]);
+
+  const services = servicesResult.success ? servicesResult.data : [];
+  const portfolio = portfolioResult.success ? portfolioResult.data : [];
+  const testimonials = testimonialsResult.success ? testimonialsResult.data : [];
 
   return (
     <>
       <Hero dictionary={dict.hero} />
-      <ServicesSection dictionary={dict} locale={lang as Locale} />
-      <PortfolioSection dictionary={dict} locale={lang as Locale} />
-      <TestimonialsSection dictionary={dict} locale={lang as Locale} />
+      <ServicesSection dictionary={dict} services={services} />
+      <PortfolioSection dictionary={dict} items={portfolio} />
+      <TestimonialsSection dictionary={dict} testimonials={testimonials} />
       <ContactSection dictionary={dict.contact} />
     </>
   );

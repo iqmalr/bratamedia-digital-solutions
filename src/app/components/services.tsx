@@ -9,8 +9,7 @@ import {
   Headphones,
 } from "lucide-react";
 import type { Dictionary } from "@/i18n/types";
-import type { Locale } from "@/i18n/config";
-import { getMockServices } from "@/content/mock-data";
+import type { LocalizedService } from "@/lib/actions/services";
 import { SectionWrapper } from "@/app/components/ui/section-wrapper";
 import { SectionHeading } from "@/app/components/ui/section-heading";
 import { FadeInUp, StaggerContainer, StaggerItem } from "@/app/components/ui/motion";
@@ -70,17 +69,10 @@ function ServiceCard({ name, description, icon }: ServiceCardProps) {
 
 interface ServicesSectionProps {
   dictionary: Dictionary;
-  locale: Locale;
+  services: LocalizedService[];
 }
 
-/**
- * ServicesSection — displays the 3×2 grid of services on the landing page.
- *
- * Server Component: fetches mock data synchronously, no client-side state needed.
- * Animations are added in a separate task via Framer Motion.
- */
-export function ServicesSection({ dictionary, locale }: ServicesSectionProps) {
-  const services = getMockServices(locale);
+export function ServicesSection({ dictionary, services }: ServicesSectionProps) {
   const { title, subtitle } = dictionary.services;
 
   return (

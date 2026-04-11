@@ -2,9 +2,7 @@
 
 import { FolderOpen, ExternalLink } from "lucide-react";
 import type { Dictionary } from "@/i18n/types";
-import type { Locale } from "@/i18n/config";
 import type { LocalizedPortfolioItem } from "@/lib/actions/portfolio";
-import { getMockPortfolio } from "@/content/mock-data";
 import { SectionWrapper } from "@/app/components/ui/section-wrapper";
 import { SectionHeading } from "@/app/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
@@ -180,21 +178,10 @@ function PortfolioCard({ item, viewProjectLabel }: PortfolioCardProps) {
 
 interface PortfolioSectionProps {
   dictionary: Dictionary;
-  locale: Locale;
+  items: LocalizedPortfolioItem[];
 }
 
-/**
- * PortfolioSection — showcases 6 portfolio items in a responsive grid.
- *
- * Server Component: fetches mock data synchronously, no client-side state needed.
- * Uses the "default" background to alternate visually with the muted Services section.
- * Animations are added in a separate task via Framer Motion.
- *
- * @example
- * <PortfolioSection dictionary={dict} locale={lang} />
- */
-export function PortfolioSection({ dictionary, locale }: PortfolioSectionProps) {
-  const items = getMockPortfolio(locale);
+export function PortfolioSection({ dictionary, items }: PortfolioSectionProps) {
   const { title, subtitle, viewProject, viewAll } = dictionary.portfolio;
 
   return (

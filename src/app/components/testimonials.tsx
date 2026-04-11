@@ -1,9 +1,7 @@
 "use client";
 
 import type { Dictionary } from "@/i18n/types";
-import type { Locale } from "@/i18n/config";
 import type { LocalizedTestimonial } from "@/lib/actions/testimonials";
-import { getMockTestimonials } from "@/content/mock-data";
 import { SectionWrapper } from "@/app/components/ui/section-wrapper";
 import { SectionHeading } from "@/app/components/ui/section-heading";
 import { FadeInUp, StaggerContainer, StaggerItem } from "@/app/components/ui/motion";
@@ -108,23 +106,13 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
 interface TestimonialsSectionProps {
   dictionary: Dictionary;
-  locale: Locale;
+  testimonials: LocalizedTestimonial[];
 }
 
-/**
- * TestimonialsSection — displays a 2×2 grid of client testimonials.
- *
- * Server Component: fetches mock data synchronously, no client-side state needed.
- * Animations are added in a separate task via Framer Motion.
- *
- * Uses "default" background to alternate visually with the preceding
- * ServicesSection (muted) and PortfolioSection (default).
- */
 export function TestimonialsSection({
   dictionary,
-  locale,
+  testimonials,
 }: TestimonialsSectionProps) {
-  const testimonials = getMockTestimonials(locale);
   const { title, subtitle } = dictionary.testimonials;
 
   return (
