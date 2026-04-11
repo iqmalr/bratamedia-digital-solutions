@@ -1,2 +1,5 @@
 - [Next.js 16 Breaking Changes](project_nextjs16_breaking_changes.md) — `cookies()` is async in Next.js 16; all server cookie-reading code must await it
 - [Supabase Setup Details](project_supabase_setup.md) — package versions, env var names, client file locations, cookie handling pattern, .gitignore fix
+- [Database Schema](project_schema.md) — tables (services, portfolio, testimonials, contact_submissions), RLS model, admin role via app_metadata, bilingual column pattern
+- [Database Type Compatibility Fix](project_database_type_compat.md) — Omit<> types must be intersected with Record<string,unknown>; Relationships:[] required per table in Database type
+- [Zod v4 Breaking Changes](project_zod_v4_changes.md) — required_error removed in Zod 4.3.6; use .min(1, msg) instead
