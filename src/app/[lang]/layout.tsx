@@ -63,6 +63,18 @@ export default async function LangLayout(props: LayoutProps<"/[lang]">) {
   return (
     <LocaleProvider initialLocale={lang as Locale}>
       {/*
+       * Skip navigation link — allows keyboard and screen reader users to jump
+       * past the fixed navbar directly to the main content area.
+       * Visually hidden until focused (sr-only + focus:not-sr-only pattern).
+       */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-brand-foreground focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2"
+      >
+        {dict.navbar.skipToContent}
+      </a>
+
+      {/*
        * Navbar and Footer are Client Components (they use useLocale) but they
        * receive dictionary data as props from this Server Component, so all
        * translation data is fetched server-side and passed down.
@@ -72,7 +84,7 @@ export default async function LangLayout(props: LayoutProps<"/[lang]">) {
        * pt-16 offsets the fixed Navbar height so page content starts below it.
        */}
       <div className="flex min-h-screen flex-col pt-16">
-        <main className="flex-1">{props.children}</main>
+        <main id="main-content" className="flex-1">{props.children}</main>
         <Footer dict={dict.footer} navLinks={dict.navbar.links} />
       </div>
     </LocaleProvider>

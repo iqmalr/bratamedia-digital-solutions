@@ -13,6 +13,16 @@ interface SectionWrapperProps {
    * - "muted"   — slightly tinted background for visual alternation
    */
   background?: "default" | "muted";
+  /**
+   * Associates the section landmark with a heading id for screen reader navigation.
+   * Point to the id of the <h2> heading rendered by SectionHeading.
+   * Either aria-labelledby or aria-label should be provided for landmark navigation.
+   */
+  "aria-labelledby"?: string;
+  /**
+   * Direct accessible label for the section when no visible heading id is available.
+   */
+  "aria-label"?: string;
 }
 
 /**
@@ -35,10 +45,14 @@ export function SectionWrapper({
   className,
   children,
   background = "default",
+  "aria-labelledby": ariaLabelledBy,
+  "aria-label": ariaLabel,
 }: SectionWrapperProps) {
   return (
     <section
       id={id}
+      aria-labelledby={ariaLabelledBy}
+      aria-label={ariaLabel}
       className={cn(
         // Vertical padding — generous on desktop, comfortable on mobile
         "py-16 sm:py-20 lg:py-28",

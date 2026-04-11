@@ -60,6 +60,7 @@ export function Hero({ dictionary }: HeroProps) {
   return (
     <SectionWrapper
       id="hero"
+      aria-labelledby="hero-heading"
       className={cn(
         // Full-viewport centering — overrides SectionWrapper's default py-* via twMerge
         "relative flex min-h-[90vh] items-center",
@@ -86,7 +87,7 @@ export function Hero({ dictionary }: HeroProps) {
 
         {/* Headline — h1 inherits scale from globals.css (text-4xl → text-6xl) */}
         <FadeInUp delay={0.1}>
-          <h1 className="mx-auto max-w-4xl text-balance">
+          <h1 id="hero-heading" className="mx-auto max-w-4xl text-balance">
             {headline}
           </h1>
         </FadeInUp>

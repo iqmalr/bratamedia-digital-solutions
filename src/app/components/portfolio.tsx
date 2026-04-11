@@ -198,17 +198,18 @@ export function PortfolioSection({ dictionary, locale }: PortfolioSectionProps) 
   const { title, subtitle, viewProject, viewAll } = dictionary.portfolio;
 
   return (
-    <SectionWrapper id="portfolio" background="default">
+    <SectionWrapper id="portfolio" background="default" aria-labelledby="portfolio-heading">
       <FadeInUp>
-        <SectionHeading title={title} subtitle={subtitle} />
+        <SectionHeading title={title} subtitle={subtitle} headingId="portfolio-heading" />
       </FadeInUp>
 
       {/* Portfolio grid — 1 col mobile / 2 col tablet / 3 col desktop */}
       <StaggerContainer
+        role="list"
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {items.map((item) => (
-          <StaggerItem key={item.id}>
+          <StaggerItem key={item.id} role="listitem">
             <PortfolioCard item={item} viewProjectLabel={viewProject} />
           </StaggerItem>
         ))}

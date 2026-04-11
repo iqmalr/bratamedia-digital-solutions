@@ -12,6 +12,10 @@ const id: Dictionary = {
       label: "Bahasa",
       switchTo: "English",
     },
+    openMenu: "Buka menu",
+    closeMenu: "Tutup menu",
+    mobileMenu: "Navigasi mobile",
+    skipToContent: "Lewati ke konten utama",
   },
 
   hero: {

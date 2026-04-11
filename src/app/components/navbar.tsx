@@ -207,6 +207,17 @@ export function Navbar({ dict }: NavbarProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Close mobile menu when Escape is pressed
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
   const toggleMobileMenu = useCallback(
     () => setIsMobileMenuOpen((prev) => !prev),
@@ -255,7 +266,7 @@ export function Navbar({ dict }: NavbarProps) {
             <HamburgerButton
               isOpen={isMobileMenuOpen}
               onToggle={toggleMobileMenu}
-              label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              label={isMobileMenuOpen ? dict.closeMenu : dict.openMenu}
             />
           </div>
         </nav>
@@ -266,6 +277,7 @@ export function Navbar({ dict }: NavbarProps) {
         {isMobileMenuOpen && (
           <motion.div
             key="mobile-menu"
+            aria-label={dict.mobileMenu}
             {...(shouldReduce ? {} : mobileMenuVariants)}
             className="border-t border-border bg-background/95 backdrop-blur-md md:hidden"
           >
