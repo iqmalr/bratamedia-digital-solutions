@@ -1,0 +1,2 @@
+- [Next.js 16 Breaking Changes](project_nextjs16_breaking_changes.md) — `cookies()` is async in Next.js 16; all server cookie-reading code must await it
+- [Supabase Setup Details](project_supabase_setup.md) — package versions, env var names, client file locations, cookie handling pattern, .gitignore fix
