@@ -1,3 +1,5 @@
+"use client";
+
 import { FolderOpen, ExternalLink } from "lucide-react";
 import type { Dictionary } from "@/i18n/types";
 import type { Locale } from "@/i18n/config";
@@ -6,6 +8,7 @@ import { getMockPortfolio } from "@/content/mock-data";
 import { SectionWrapper } from "@/app/components/ui/section-wrapper";
 import { SectionHeading } from "@/app/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
+import { FadeInUp, StaggerContainer, StaggerItem } from "@/app/components/ui/motion";
 
 // ---------------------------------------------------------------------------
 // Category color mapping — subtle visual differentiation per industry
@@ -196,27 +199,30 @@ export function PortfolioSection({ dictionary, locale }: PortfolioSectionProps) 
 
   return (
     <SectionWrapper id="portfolio" background="default">
-      <SectionHeading title={title} subtitle={subtitle} />
+      <FadeInUp>
+        <SectionHeading title={title} subtitle={subtitle} />
+      </FadeInUp>
 
       {/* Portfolio grid — 1 col mobile / 2 col tablet / 3 col desktop */}
-      <ul
-        role="list"
+      <StaggerContainer
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {items.map((item) => (
-          <li key={item.id}>
+          <StaggerItem key={item.id}>
             <PortfolioCard item={item} viewProjectLabel={viewProject} />
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </StaggerContainer>
 
       {/* View All Projects CTA */}
-      <div className="mt-12 flex justify-center">
-        {/* Non-functional placeholder — will wire up to /portfolio route in a later task */}
-        <Button variant="brand-outline" size="lg" aria-label={viewAll}>
-          {viewAll}
-        </Button>
-      </div>
+      <FadeInUp delay={0.2}>
+        <div className="mt-12 flex justify-center">
+          {/* Non-functional placeholder — will wire up to /portfolio route in a later task */}
+          <Button variant="brand-outline" size="lg" aria-label={viewAll}>
+            {viewAll}
+          </Button>
+        </div>
+      </FadeInUp>
     </SectionWrapper>
   );
 }

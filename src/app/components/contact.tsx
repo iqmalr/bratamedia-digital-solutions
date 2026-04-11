@@ -8,6 +8,7 @@ import { SectionWrapper } from "@/app/components/ui/section-wrapper";
 import { SectionHeading } from "@/app/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { FadeInUp } from "@/app/components/ui/motion";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -245,63 +246,64 @@ export function ContactSection({ dictionary }: ContactSectionProps) {
 
   return (
     <SectionWrapper id="contact" background="default">
-      <SectionHeading title={title} subtitle={subtitle} />
+      <FadeInUp>
+        <SectionHeading title={title} subtitle={subtitle} />
+      </FadeInUp>
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
         {/* Form column */}
-        <div className="lg:col-span-7">
+        <FadeInUp delay={0.1} className="lg:col-span-7">
           <ContactForm form={form} />
-        </div>
+        </FadeInUp>
 
         {/* Info sidebar */}
-        <aside
-          aria-label="Contact information"
-          className="lg:col-span-5"
-        >
-          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
-            <h3 className="mb-6 text-base font-semibold text-foreground">
-              {/* Decorative accent to tie sidebar visually to the brand */}
-              <span
-                aria-hidden="true"
-                className="mr-2 inline-block h-1 w-6 translate-y-[-3px] rounded-full bg-brand align-middle"
-              />
-              Bratamedia Digital Solutions
-            </h3>
+        <FadeInUp delay={0.2} className="lg:col-span-5">
+          <aside aria-label="Contact information">
+            <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+              <h3 className="mb-6 text-base font-semibold text-foreground">
+                {/* Decorative accent to tie sidebar visually to the brand */}
+                <span
+                  aria-hidden="true"
+                  className="mr-2 inline-block h-1 w-6 translate-y-[-3px] rounded-full bg-brand align-middle"
+                />
+                Bratamedia Digital Solutions
+              </h3>
 
-            <ul role="list" className="flex flex-col gap-6">
-              {/* Address */}
-              <li>
-                <ContactInfoItem icon={<MapPin className="h-5 w-5" />}>
-                  <address className="not-italic">{info.address}</address>
-                </ContactInfoItem>
-              </li>
+              <ul role="list" className="flex flex-col gap-6">
+                {/* Address */}
+                <li>
+                  <ContactInfoItem icon={<MapPin className="h-5 w-5" />}>
+                    <address className="not-italic">{info.address}</address>
+                  </ContactInfoItem>
+                </li>
 
-              {/* Email */}
-              <li>
-                <ContactInfoItem icon={<Mail className="h-5 w-5" />}>
-                  <a
-                    href={`mailto:${info.email}`}
-                    className="break-all hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 rounded-sm"
-                  >
-                    {info.email}
-                  </a>
-                </ContactInfoItem>
-              </li>
+                {/* Email */}
+                <li>
+                  <ContactInfoItem icon={<Mail className="h-5 w-5" />}>
+                    <a
+                      href={`mailto:${info.email}`}
+                      className="break-all hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 rounded-sm"
+                    >
+                      {info.email}
+                    </a>
+                  </ContactInfoItem>
+                </li>
 
-              {/* Phone */}
-              <li>
-                <ContactInfoItem icon={<Phone className="h-5 w-5" />}>
-                  <a
-                    href={`tel:${info.phone}`}
-                    className="hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 rounded-sm"
-                  >
-                    {info.phone}
-                  </a>
-                </ContactInfoItem>
-              </li>
-            </ul>
-          </div>
-        </aside>
+                {/* Phone */}
+                <li>
+                  <ContactInfoItem icon={<Phone className="h-5 w-5" />}>
+                    <a
+                      href={`tel:${info.phone}`}
+                      className="hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 rounded-sm"
+                    >
+                      {info.phone}
+                    </a>
+                  </ContactInfoItem>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </FadeInUp>
       </div>
     </SectionWrapper>
   );

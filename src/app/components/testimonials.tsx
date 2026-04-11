@@ -1,9 +1,12 @@
+"use client";
+
 import type { Dictionary } from "@/i18n/types";
 import type { Locale } from "@/i18n/config";
 import type { LocalizedTestimonial } from "@/lib/actions/testimonials";
 import { getMockTestimonials } from "@/content/mock-data";
 import { SectionWrapper } from "@/app/components/ui/section-wrapper";
 import { SectionHeading } from "@/app/components/ui/section-heading";
+import { FadeInUp, StaggerContainer, StaggerItem } from "@/app/components/ui/motion";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -126,19 +129,18 @@ export function TestimonialsSection({
 
   return (
     <SectionWrapper id="testimonials" background="muted">
-      <SectionHeading title={title} subtitle={subtitle} />
+      <FadeInUp>
+        <SectionHeading title={title} subtitle={subtitle} />
+      </FadeInUp>
 
       {/* Testimonials grid — 1 col mobile / 2 col tablet and desktop */}
-      <ul
-        role="list"
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2"
-      >
+      <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {testimonials.map((testimonial) => (
-          <li key={testimonial.id}>
+          <StaggerItem key={testimonial.id}>
             <TestimonialCard testimonial={testimonial} />
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </StaggerContainer>
     </SectionWrapper>
   );
 }

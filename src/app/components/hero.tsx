@@ -1,6 +1,9 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { SectionWrapper } from "@/app/components/ui/section-wrapper";
+import { FadeInUp } from "@/app/components/ui/motion";
 import type { HeroDictionary } from "@/i18n/types";
 
 // ---------------------------------------------------------------------------
@@ -69,81 +72,91 @@ export function Hero({ dictionary }: HeroProps) {
       {/* Content column — centered text on mobile, left-aligned on lg+ */}
       <div className="w-full text-center">
         {/* Eyebrow badge */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand-subtle px-4 py-1.5">
-          <span
-            aria-hidden="true"
-            className="h-2 w-2 rounded-full bg-brand animate-pulse"
-          />
-          <span className="text-xs font-semibold uppercase tracking-widest text-brand">
-            Bratamedia Digital Solutions
-          </span>
-        </div>
+        <FadeInUp delay={0}>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand-subtle px-4 py-1.5">
+            <span
+              aria-hidden="true"
+              className="h-2 w-2 rounded-full bg-brand animate-pulse"
+            />
+            <span className="text-xs font-semibold uppercase tracking-widest text-brand">
+              Bratamedia Digital Solutions
+            </span>
+          </div>
+        </FadeInUp>
 
         {/* Headline — h1 inherits scale from globals.css (text-4xl → text-6xl) */}
-        <h1 className="mx-auto max-w-4xl text-balance">
-          {headline}
-        </h1>
+        <FadeInUp delay={0.1}>
+          <h1 className="mx-auto max-w-4xl text-balance">
+            {headline}
+          </h1>
+        </FadeInUp>
 
         {/* Subheadline */}
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl">
-          {subheadline}
-        </p>
+        <FadeInUp delay={0.2}>
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl">
+            {subheadline}
+          </p>
+        </FadeInUp>
 
         {/* CTA row — stacked on mobile, inline on sm+ */}
-        <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
-          <a
-            href="#contact"
-            className={cn(
-              buttonVariants({ variant: "brand", size: "lg" }),
-              "min-w-[160px] px-8 py-3 text-base h-auto",
-            )}
-          >
-            {cta.primary}
-          </a>
-          <a
-            href="#portfolio"
-            className={cn(
-              buttonVariants({ variant: "brand-outline", size: "lg" }),
-              "min-w-[160px] px-8 py-3 text-base h-auto",
-            )}
-          >
-            {cta.secondary}
-          </a>
-        </div>
+        <FadeInUp delay={0.3}>
+          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+            <a
+              href="#contact"
+              className={cn(
+                buttonVariants({ variant: "brand", size: "lg" }),
+                "min-w-[160px] px-8 py-3 text-base h-auto",
+              )}
+            >
+              {cta.primary}
+            </a>
+            <a
+              href="#portfolio"
+              className={cn(
+                buttonVariants({ variant: "brand-outline", size: "lg" }),
+                "min-w-[160px] px-8 py-3 text-base h-auto",
+              )}
+            >
+              {cta.secondary}
+            </a>
+          </div>
+        </FadeInUp>
 
         {/* Scroll hint — subtle indicator pointing downward */}
-        <div className="mt-16 flex justify-center">
-          <a
-            href="#services"
-            className={cn(
-              "flex flex-col items-center gap-1.5 text-muted-foreground/50",
-              "transition-colors duration-200 hover:text-brand",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm",
-            )}
-            aria-label="Scroll to services"
-          >
-            <span className="text-xs font-medium tracking-widest uppercase">
-              Scroll
-            </span>
-            {/* Animated chevron */}
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              aria-hidden="true"
-              className="animate-bounce"
+        <FadeInUp delay={0.5}>
+          <div className="mt-16 flex justify-center">
+            <a
+              href="#services"
+              className={cn(
+                "flex flex-col items-center gap-1.5 text-muted-foreground/50",
+                "transition-colors duration-200 hover:text-brand",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm",
+              )}
+              aria-label="Scroll to services"
             >
-              <path
-                d="M5 7.5L10 12.5L15 7.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
-        </div>
+              <span className="text-xs font-medium tracking-widest uppercase">
+                Scroll
+              </span>
+              {/* Animated chevron */}
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                aria-hidden="true"
+                className="animate-bounce"
+              >
+                <path
+                  d="M5 7.5L10 12.5L15 7.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+        </FadeInUp>
       </div>
     </SectionWrapper>
   );

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Globe,
   Smartphone,
@@ -11,6 +13,7 @@ import type { Locale } from "@/i18n/config";
 import { getMockServices } from "@/content/mock-data";
 import { SectionWrapper } from "@/app/components/ui/section-wrapper";
 import { SectionHeading } from "@/app/components/ui/section-heading";
+import { FadeInUp, StaggerContainer, StaggerItem } from "@/app/components/ui/motion";
 
 // ---------------------------------------------------------------------------
 // Icon map — keyed by the icon string stored in the data layer
@@ -82,23 +85,24 @@ export function ServicesSection({ dictionary, locale }: ServicesSectionProps) {
 
   return (
     <SectionWrapper id="services" background="muted">
-      <SectionHeading title={title} subtitle={subtitle} />
+      <FadeInUp>
+        <SectionHeading title={title} subtitle={subtitle} />
+      </FadeInUp>
 
       {/* Services grid — 1 col mobile / 2 col tablet / 3 col desktop */}
-      <ul
-        role="list"
+      <StaggerContainer
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {services.map((service) => (
-          <li key={service.id}>
+          <StaggerItem key={service.id}>
             <ServiceCard
               name={service.name}
               description={service.description}
               icon={service.icon}
             />
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </StaggerContainer>
     </SectionWrapper>
   );
 }
