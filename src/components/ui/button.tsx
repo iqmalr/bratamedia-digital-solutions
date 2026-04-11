@@ -18,6 +18,13 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        // Bratamedia brand variants
+        brand:
+          "bg-brand text-brand-foreground hover:bg-brand-dark active:bg-brand-dark focus-visible:ring-brand/40 shadow-sm",
+        "brand-outline":
+          "border-brand bg-transparent text-brand hover:bg-brand hover:text-brand-foreground focus-visible:ring-brand/40",
+        "brand-ghost":
+          "text-brand hover:bg-brand-subtle hover:text-brand-dark focus-visible:ring-brand/40",
       },
       size: {
         default:
