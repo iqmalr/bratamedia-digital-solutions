@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { locales, defaultLocale, hasLocale } from "@/i18n/index";
+import { locales, defaultLocale, hasLocale } from "@/i18n/config";
 
 /**
  * Detect the best matching locale from the Accept-Language header.

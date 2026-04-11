@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { type Locale, locales } from "@/i18n/index";
+import { type Locale, locales } from "@/i18n/config";
 
 // ---------------------------------------------------------------------------
 // Context shape
