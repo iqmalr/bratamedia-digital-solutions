@@ -24,6 +24,10 @@ const contactFormSchema = z.object({
     .trim()
     .optional()
     .transform((val) => (val === '' ? undefined : val)),
+  subject: z
+    .string()
+    .trim()
+    .min(1, 'Subject is required.'),
   message: z
     .string()
     .trim()
@@ -36,7 +40,7 @@ const contactFormSchema = z.object({
 
 export type ContactFormResult =
   | { success: true }
-  | { success: false; error: string; fieldErrors?: Partial<Record<'name' | 'email' | 'phone' | 'message', string>> }
+  | { success: false; error: string; fieldErrors?: Partial<Record<'name' | 'email' | 'phone' | 'subject' | 'message', string>> }
 
 // ---------------------------------------------------------------------------
 // Rate limiting helper
@@ -86,7 +90,7 @@ function isRateLimited(ip: string): boolean {
 /**
  * Handles contact form submissions from the landing page.
  *
- * - Validates all fields with Zod (name, email, optional phone, message).
+ * - Validates all fields with Zod (name, email, optional phone, subject, message).
  * - Applies a simple in-memory rate limit per IP (5 requests / 10 minutes).
  * - Inserts a row into the contact_submissions table via the anon Supabase
  *   client. The RLS INSERT policy allows unauthenticated writes, while SELECT
@@ -96,7 +100,7 @@ function isRateLimited(ip: string): boolean {
  * Caller should NOT expose raw Supabase errors to the user.
  *
  * @param formData - The FormData submitted from the contact form.
- *                   Expected fields: name, email, phone (optional), message.
+ *                   Expected fields: name, email, phone (optional), subject, message.
  * @returns `{ success: true }` on success, or
  *          `{ success: false, error, fieldErrors? }` on validation failure or
  *          server error.
@@ -136,16 +140,17 @@ export async function submitContactForm(
     name: formData.get('name'),
     email: formData.get('email'),
     phone: formData.get('phone'),
+    subject: formData.get('subject'),
     message: formData.get('message'),
   }
 
   const parsed = contactFormSchema.safeParse(rawInput)
 
   if (!parsed.success) {
-    const fieldErrors: Partial<Record<'name' | 'email' | 'phone' | 'message', string>> = {}
+    const fieldErrors: Partial<Record<'name' | 'email' | 'phone' | 'subject' | 'message', string>> = {}
 
     for (const issue of parsed.error.issues) {
-      const field = issue.path[0] as 'name' | 'email' | 'phone' | 'message'
+      const field = issue.path[0] as 'name' | 'email' | 'phone' | 'subject' | 'message'
       if (!fieldErrors[field]) {
         fieldErrors[field] = issue.message
       }
@@ -158,7 +163,7 @@ export async function submitContactForm(
     }
   }
 
-  const { name, email, phone, message } = parsed.data
+  const { name, email, phone, subject, message } = parsed.data
 
   // -------------------------------------------------------------------------
   // 3. Insert into database
@@ -170,6 +175,7 @@ export async function submitContactForm(
       name,
       email,
       phone: phone ?? null,
+      subject,
       message,
     })
 
