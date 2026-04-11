@@ -14,6 +14,14 @@ export interface NavbarDictionary {
     label: string;
     switchTo: string;
   };
+  /** Accessible label for the hamburger button when the menu is closed */
+  openMenu: string;
+  /** Accessible label for the hamburger button when the menu is open */
+  closeMenu: string;
+  /** Accessible label for the mobile navigation panel */
+  mobileMenu: string;
+  /** Accessible label for the skip navigation link */
+  skipToContent: string;
 }
 
 export interface HeroDictionary {

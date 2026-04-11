@@ -84,17 +84,18 @@ export function ServicesSection({ dictionary, locale }: ServicesSectionProps) {
   const { title, subtitle } = dictionary.services;
 
   return (
-    <SectionWrapper id="services" background="muted">
+    <SectionWrapper id="services" background="muted" aria-labelledby="services-heading">
       <FadeInUp>
-        <SectionHeading title={title} subtitle={subtitle} />
+        <SectionHeading title={title} subtitle={subtitle} headingId="services-heading" />
       </FadeInUp>
 
       {/* Services grid — 1 col mobile / 2 col tablet / 3 col desktop */}
       <StaggerContainer
+        role="list"
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {services.map((service) => (
-          <StaggerItem key={service.id}>
+          <StaggerItem key={service.id} role="listitem">
             <ServiceCard
               name={service.name}
               description={service.description}

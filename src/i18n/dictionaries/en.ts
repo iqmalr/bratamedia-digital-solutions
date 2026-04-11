@@ -12,6 +12,10 @@ const en: Dictionary = {
       label: "Language",
       switchTo: "Indonesia",
     },
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    mobileMenu: "Mobile navigation",
+    skipToContent: "Skip to main content",
   },
 
   hero: {

@@ -245,9 +245,9 @@ export function ContactSection({ dictionary }: ContactSectionProps) {
   const { title, subtitle, form, info } = dictionary;
 
   return (
-    <SectionWrapper id="contact" background="default">
+    <SectionWrapper id="contact" background="default" aria-labelledby="contact-heading">
       <FadeInUp>
-        <SectionHeading title={title} subtitle={subtitle} />
+        <SectionHeading title={title} subtitle={subtitle} headingId="contact-heading" />
       </FadeInUp>
 
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">

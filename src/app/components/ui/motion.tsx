@@ -40,21 +40,25 @@ interface StaggerContainerProps {
   children: React.ReactNode;
   className?: string;
   staggerDelay?: number;
+  /** ARIA role override — use "list" when children represent list items */
+  role?: string;
 }
 
 export function StaggerContainer({
   children,
   className,
   staggerDelay = 0.1,
+  role,
 }: StaggerContainerProps) {
   const shouldReduce = useReducedMotion();
 
   if (shouldReduce) {
-    return <div className={className}>{children}</div>;
+    return <div role={role} className={className}>{children}</div>;
   }
 
   return (
     <motion.div
+      role={role}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
@@ -76,17 +80,20 @@ export function StaggerContainer({
 interface StaggerItemProps {
   children: React.ReactNode;
   className?: string;
+  /** ARIA role override — use "listitem" when inside a StaggerContainer with role="list" */
+  role?: string;
 }
 
-export function StaggerItem({ children, className }: StaggerItemProps) {
+export function StaggerItem({ children, className, role }: StaggerItemProps) {
   const shouldReduce = useReducedMotion();
 
   if (shouldReduce) {
-    return <div className={className}>{children}</div>;
+    return <div role={role} className={className}>{children}</div>;
   }
 
   return (
     <motion.div
+      role={role}
       variants={{
         hidden: { opacity: 0, y: 24 },
         visible: {

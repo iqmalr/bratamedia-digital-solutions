@@ -128,15 +128,18 @@ export function TestimonialsSection({
   const { title, subtitle } = dictionary.testimonials;
 
   return (
-    <SectionWrapper id="testimonials" background="muted">
+    <SectionWrapper id="testimonials" background="muted" aria-labelledby="testimonials-heading">
       <FadeInUp>
-        <SectionHeading title={title} subtitle={subtitle} />
+        <SectionHeading title={title} subtitle={subtitle} headingId="testimonials-heading" />
       </FadeInUp>
 
       {/* Testimonials grid — 1 col mobile / 2 col tablet and desktop */}
-      <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <StaggerContainer
+        role="list"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+      >
         {testimonials.map((testimonial) => (
-          <StaggerItem key={testimonial.id}>
+          <StaggerItem key={testimonial.id} role="listitem">
             <TestimonialCard testimonial={testimonial} />
           </StaggerItem>
         ))}

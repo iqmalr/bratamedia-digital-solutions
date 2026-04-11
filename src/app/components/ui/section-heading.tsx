@@ -15,6 +15,11 @@ interface SectionHeadingProps {
    * Default: true
    */
   withAccent?: boolean;
+  /**
+   * id applied to the <h2> element, enabling the parent SectionWrapper to
+   * reference it via aria-labelledby for landmark navigation.
+   */
+  headingId?: string;
 }
 
 /**
@@ -38,6 +43,7 @@ export function SectionHeading({
   align = "center",
   className,
   withAccent = true,
+  headingId,
 }: SectionHeadingProps) {
   return (
     <div
@@ -58,6 +64,7 @@ export function SectionHeading({
       )}
 
       <h2
+        id={headingId}
         className={cn(
           // h2 base styles come from globals.css @layer base
           "text-foreground",
