@@ -157,14 +157,16 @@ function ContactForm({ form }: ContactFormProps) {
       </FormField>
 
       {/* Subject */}
-      <FormField id="subject" label={form.subject.label}>
+      <FormField id="subject" label={form.subject.label} error={fieldErrors?.subject}>
         <input
           id="subject"
           name="subject"
           type="text"
           required
           placeholder={form.subject.placeholder}
-          className={inputClasses}
+          aria-describedby={fieldErrors?.subject ? "subject-error" : undefined}
+          aria-invalid={!!fieldErrors?.subject}
+          className={cn(inputClasses, fieldErrors?.subject && errorInputClasses)}
         />
       </FormField>
 
