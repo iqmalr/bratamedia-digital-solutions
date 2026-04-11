@@ -64,7 +64,7 @@ function FormField({ id, label, error, children }: FormFieldProps) {
 // ---------------------------------------------------------------------------
 
 const inputClasses =
-  "w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-colors";
+  "w-full min-h-[44px] rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-colors";
 
 const errorInputClasses = "border-red-500 focus:ring-red-300 focus:border-red-500";
 
@@ -87,7 +87,7 @@ function ContactForm({ form }: ContactFormProps) {
       <div
         role="status"
         aria-live="polite"
-        className="flex flex-col items-center justify-center gap-4 rounded-xl border border-green-200 bg-green-50 p-10 text-center"
+        className="flex flex-col items-center justify-center gap-4 rounded-xl border border-green-200 bg-green-50 p-6 sm:p-10 text-center"
       >
         <CheckCircle2
           aria-hidden="true"

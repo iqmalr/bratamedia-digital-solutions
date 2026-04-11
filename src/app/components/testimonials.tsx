@@ -89,12 +89,12 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
           {initials}
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex min-w-0 flex-col">
           <span className="text-sm font-semibold text-foreground">
             {testimonial.client_name}
           </span>
           {byline && (
-            <span className="text-sm text-muted-foreground">{byline}</span>
+            <span className="text-sm text-muted-foreground break-words">{byline}</span>
           )}
         </div>
       </footer>

@@ -73,12 +73,12 @@ export function Hero({ dictionary }: HeroProps) {
       <div className="w-full text-center">
         {/* Eyebrow badge */}
         <FadeInUp delay={0}>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand-subtle px-4 py-1.5">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand-subtle px-4 py-1.5 max-w-full">
             <span
               aria-hidden="true"
-              className="h-2 w-2 rounded-full bg-brand animate-pulse"
+              className="h-2 w-2 shrink-0 rounded-full bg-brand animate-pulse"
             />
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand">
+            <span className="text-xs font-semibold uppercase tracking-wide sm:tracking-widest text-brand truncate">
               Bratamedia Digital Solutions
             </span>
           </div>
@@ -100,12 +100,12 @@ export function Hero({ dictionary }: HeroProps) {
 
         {/* CTA row — stacked on mobile, inline on sm+ */}
         <FadeInUp delay={0.3}>
-          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+          <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
             <a
               href="#contact"
               className={cn(
                 buttonVariants({ variant: "brand", size: "lg" }),
-                "min-w-[160px] px-8 py-3 text-base h-auto",
+                "w-full sm:w-auto min-w-0 sm:min-w-[160px] px-8 py-3 text-base h-auto min-h-[44px] justify-center",
               )}
             >
               {cta.primary}
@@ -114,7 +114,7 @@ export function Hero({ dictionary }: HeroProps) {
               href="#portfolio"
               className={cn(
                 buttonVariants({ variant: "brand-outline", size: "lg" }),
-                "min-w-[160px] px-8 py-3 text-base h-auto",
+                "w-full sm:w-auto min-w-0 sm:min-w-[160px] px-8 py-3 text-base h-auto min-h-[44px] justify-center",
               )}
             >
               {cta.secondary}

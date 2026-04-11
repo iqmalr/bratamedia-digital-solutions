@@ -201,7 +201,7 @@ function FooterBottomBar({ copyright, policyLinks }: FooterBottomBarProps) {
   return (
     <div className="flex flex-col items-center gap-3 border-t border-border pt-6 sm:flex-row sm:justify-between">
       <p className="text-xs text-muted-foreground">{copyrightText}</p>
-      <ul role="list" className="flex items-center gap-4">
+      <ul role="list" className="flex flex-wrap items-center gap-x-4 gap-y-2">
         {(["privacy", "terms", "sitemap"] as const).map((key) => (
           <li key={key}>
             <a
