@@ -41,7 +41,7 @@ function ServiceCard({ name, description, icon }: ServiceCardProps) {
   const Icon = (icon !== null ? iconMap[icon] : undefined) ?? Globe;
 
   return (
-    <article className="group flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand/40 hover:shadow-md">
+    <article className="group flex h-full flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand/40 hover:shadow-md">
       {/* Icon container with orange accent background */}
       <div
         aria-hidden="true"
@@ -87,7 +87,7 @@ export function ServicesSection({ dictionary, services }: ServicesSectionProps) 
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {services.map((service) => (
-          <StaggerItem key={service.id} role="listitem">
+          <StaggerItem key={service.id} role="listitem" className="h-full">
             <ServiceCard
               name={service.name}
               description={service.description}

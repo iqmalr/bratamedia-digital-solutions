@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/app/admin/components/image-upload";
 import {
   createPortfolioItem,
   updatePortfolioItem,
@@ -41,6 +42,10 @@ const errorClass = "mt-1 text-xs text-destructive";
 export function PortfolioForm({ initialData }: PortfolioFormProps) {
   const router = useRouter();
   const isEditMode = initialData !== undefined;
+
+  const [imageUrl, setImageUrl] = useState<string | null>(
+    initialData?.image_url ?? null
+  );
 
   async function formAction(
     _prevState: ActionResult,
@@ -185,22 +190,16 @@ export function PortfolioForm({ initialData }: PortfolioFormProps) {
           Details
         </h2>
 
-        {/* Image URL */}
+        {/* Image Upload */}
         <div>
-          <label htmlFor="image_url" className={labelClass}>
-            Image URL
-          </label>
-          <input
-            id="image_url"
-            name="image_url"
-            type="text"
-            defaultValue={initialData?.image_url ?? ""}
-            aria-describedby="image_url-hint"
-            className={inputClass}
+          <ImageUpload
+            bucket="portfolio-images"
+            currentUrl={imageUrl}
+            onUploadComplete={setImageUrl}
+            onRemove={() => setImageUrl(null)}
           />
-          <p id="image_url-hint" className="mt-1 text-xs text-muted-foreground">
-            Direct image URL — upload feature coming soon
-          </p>
+          {/* Hidden input carries the resolved URL into the form submission */}
+          <input type="hidden" name="image_url" value={imageUrl ?? ""} />
         </div>
 
         {/* Tags */}

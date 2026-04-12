@@ -60,7 +60,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
   );
 
   return (
-    <article className="flex flex-col gap-5 rounded-xl border border-border bg-card p-6 shadow-sm sm:p-7">
+    <article className="flex h-full flex-col gap-5 rounded-xl border border-border bg-card p-6 shadow-sm sm:p-7">
       {/* Decorative opening quotation mark */}
       <span
         aria-hidden="true"
@@ -79,13 +79,21 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
       {/* Client attribution */}
       <footer className="flex items-center gap-4">
-        {/* Avatar — initials placeholder */}
-        <div
-          aria-hidden="true"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand text-brand-foreground text-sm font-semibold select-none"
-        >
-          {initials}
-        </div>
+        {/* Avatar — real photo or initials fallback */}
+        {testimonial.avatar_url ? (
+          <img
+            src={testimonial.avatar_url}
+            alt={testimonial.client_name}
+            className="h-11 w-11 shrink-0 rounded-full object-cover"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand text-brand-foreground text-sm font-semibold select-none"
+          >
+            {initials}
+          </div>
+        )}
 
         <div className="flex min-w-0 flex-col">
           <span className="text-sm font-semibold text-foreground">
@@ -127,7 +135,7 @@ export function TestimonialsSection({
         className="grid grid-cols-1 gap-6 sm:grid-cols-2"
       >
         {testimonials.map((testimonial) => (
-          <StaggerItem key={testimonial.id} role="listitem">
+          <StaggerItem key={testimonial.id} role="listitem" className="h-full">
             <TestimonialCard testimonial={testimonial} />
           </StaggerItem>
         ))}

@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/app/admin/components/image-upload";
 import {
   createTestimonial,
   updateTestimonial,
@@ -41,6 +42,10 @@ const errorClass = "mt-1 text-xs text-destructive";
 export function TestimonialForm({ initialData }: TestimonialFormProps) {
   const router = useRouter();
   const isEditMode = initialData !== undefined;
+
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(
+    initialData?.avatar_url ?? null
+  );
 
   async function formAction(
     _prevState: ActionResult,
@@ -198,22 +203,17 @@ export function TestimonialForm({ initialData }: TestimonialFormProps) {
           Media
         </h2>
 
-        {/* Avatar URL */}
+        {/* Avatar Upload */}
         <div>
-          <label htmlFor="avatar_url" className={labelClass}>
-            Avatar URL
-          </label>
-          <input
-            id="avatar_url"
-            name="avatar_url"
-            type="text"
-            defaultValue={initialData?.avatar_url ?? ""}
-            aria-describedby="avatar_url-hint"
-            className={inputClass}
+          <ImageUpload
+            bucket="avatars"
+            currentUrl={avatarUrl}
+            onUploadComplete={setAvatarUrl}
+            onRemove={() => setAvatarUrl(null)}
+            label="Client Avatar"
           />
-          <p id="avatar_url-hint" className="mt-1 text-xs text-muted-foreground">
-            Direct image URL — upload feature coming soon
-          </p>
+          {/* Hidden input carries the resolved URL into the form submission */}
+          <input type="hidden" name="avatar_url" value={avatarUrl ?? ""} />
         </div>
       </div>
 

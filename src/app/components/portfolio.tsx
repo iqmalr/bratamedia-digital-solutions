@@ -128,7 +128,15 @@ function PortfolioCard({ item, viewProjectLabel }: PortfolioCardProps) {
     <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
       {/* Image area */}
       <div className="overflow-hidden">
-        <ImagePlaceholder category={item.category} title={item.title} />
+        {item.image_url ? (
+          <img
+            src={item.image_url}
+            alt={item.title}
+            className="h-48 w-full object-cover"
+          />
+        ) : (
+          <ImagePlaceholder category={item.category} title={item.title} />
+        )}
       </div>
 
       {/* Card body */}
