@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { TestimonialForm } from "@/app/admin/testimonials/testimonial-form";
+import { TestimonialForm } from "@/app/admin/(dashboard)/testimonials/testimonial-form";
 
 export default function NewTestimonialPage() {
   return (

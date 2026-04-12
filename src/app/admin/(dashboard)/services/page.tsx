@@ -3,8 +3,8 @@ import { Wrench } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getAllServices } from "@/lib/actions/admin/services";
-import { ToggleActiveButton } from "@/app/admin/services/toggle-active-button";
-import { DeleteServiceButton } from "@/app/admin/services/delete-service-button";
+import { ToggleActiveButton } from "@/app/admin/(dashboard)/services/toggle-active-button";
+import { DeleteServiceButton } from "@/app/admin/(dashboard)/services/delete-service-button";
 
 export default async function ServicesPage() {
   const services = await getAllServices();

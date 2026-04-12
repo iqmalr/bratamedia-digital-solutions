@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import { getPortfolioItemById } from "@/lib/actions/admin/portfolio";
-import { PortfolioForm } from "@/app/admin/portfolio/portfolio-form";
+import { PortfolioForm } from "@/app/admin/(dashboard)/portfolio/portfolio-form";
 
 // Next.js 16: params is a Promise — must be awaited
 export default async function EditPortfolioItemPage({

@@ -1,5 +1,5 @@
 import { requireAdmin } from "@/lib/actions/auth";
-import { AdminShell } from "@/app/admin/components/admin-shell";
+import { AdminShell } from "@/app/admin/(dashboard)/components/admin-shell";
 
 export default async function AdminLayout({
   children,

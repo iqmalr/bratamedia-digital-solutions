@@ -4,7 +4,7 @@ import { useActionState, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ImageUpload } from "@/app/admin/components/image-upload";
+import { ImageUpload } from "@/app/admin/(dashboard)/components/image-upload";
 import {
   createPortfolioItem,
   updatePortfolioItem,

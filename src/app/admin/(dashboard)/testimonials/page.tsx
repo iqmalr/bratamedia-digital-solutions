@@ -1,48 +1,48 @@
 import Link from "next/link";
-import { LayoutGrid } from "lucide-react";
+import { MessageSquareQuote } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { getAllPortfolioItems } from "@/lib/actions/admin/portfolio";
-import { ToggleActiveButton } from "@/app/admin/portfolio/toggle-active-button";
-import { DeletePortfolioButton } from "@/app/admin/portfolio/delete-portfolio-button";
+import { getAllTestimonials } from "@/lib/actions/admin/testimonials";
+import { ToggleActiveButton } from "@/app/admin/(dashboard)/testimonials/toggle-active-button";
+import { DeleteTestimonialButton } from "@/app/admin/(dashboard)/testimonials/delete-testimonial-button";
 
-export default async function PortfolioPage() {
-  const items = await getAllPortfolioItems();
+export default async function TestimonialsPage() {
+  const testimonials = await getAllTestimonials();
 
   return (
     <div className="space-y-6">
       {/* Page header */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Portfolio</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Testimonials</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {items.length} item{items.length !== 1 ? "s" : ""}
+            {testimonials.length} testimonial{testimonials.length !== 1 ? "s" : ""}
           </p>
         </div>
         <Link
-          href="/admin/portfolio/new"
+          href="/admin/testimonials/new"
           className={cn(buttonVariants({ variant: "brand", size: "sm" }))}
         >
-          Add Portfolio Item
+          Add Testimonial
         </Link>
       </div>
 
       {/* Table or empty state */}
-      {items.length === 0 ? (
+      {testimonials.length === 0 ? (
         <div className="rounded-xl border border-border bg-card flex flex-col items-center justify-center py-20 text-center">
-          <LayoutGrid
+          <MessageSquareQuote
             className="h-10 w-10 text-muted-foreground/40 mb-3"
             aria-hidden="true"
           />
           <p className="text-sm font-medium text-muted-foreground">
-            No portfolio items yet
+            No testimonials yet
           </p>
           <p className="mt-1 text-sm text-muted-foreground/70">
             <Link
-              href="/admin/portfolio/new"
+              href="/admin/testimonials/new"
               className="text-brand hover:text-brand-dark underline underline-offset-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm"
             >
-              Add your first portfolio item
+              Add your first testimonial
             </Link>
           </p>
         </div>
@@ -61,25 +61,19 @@ export default async function PortfolioPage() {
                   scope="col"
                   className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
                 >
-                  Title (ID)
+                  Client Name
                 </th>
                 <th
                   scope="col"
                   className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider hidden md:table-cell"
                 >
-                  Title (EN)
+                  Company
                 </th>
                 <th
                   scope="col"
                   className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider hidden lg:table-cell"
                 >
-                  Category
-                </th>
-                <th
-                  scope="col"
-                  className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider hidden xl:table-cell"
-                >
-                  Tags
+                  Quote (EN)
                 </th>
                 <th
                   scope="col"
@@ -96,72 +90,45 @@ export default async function PortfolioPage() {
               </tr>
             </thead>
             <tbody>
-              {items.map((item) => (
+              {testimonials.map((testimonial) => (
                 <tr
-                  key={item.id}
+                  key={testimonial.id}
                   className={
                     "border-t border-border hover:bg-muted/20 transition-colors " +
-                    (!item.is_active ? "opacity-60" : "")
+                    (!testimonial.is_active ? "opacity-60" : "")
                   }
                 >
                   {/* Sort order */}
                   <td className="px-4 py-3 text-muted-foreground tabular-nums">
-                    {item.sort_order}
+                    {testimonial.sort_order}
                   </td>
 
-                  {/* Title ID */}
-                  <td className="px-4 py-3 font-medium text-foreground max-w-[200px]">
-                    <span className="block truncate" title={item.title_id}>
-                      {item.title_id}
-                    </span>
+                  {/* Client Name */}
+                  <td className="px-4 py-3 font-medium text-foreground">
+                    {testimonial.client_name}
                   </td>
 
-                  {/* Title EN */}
-                  <td className="px-4 py-3 text-muted-foreground hidden md:table-cell max-w-[200px]">
-                    <span className="block truncate" title={item.title_en}>
-                      {item.title_en}
-                    </span>
-                  </td>
-
-                  {/* Category */}
-                  <td className="px-4 py-3 hidden lg:table-cell">
-                    {item.category ? (
-                      <span className="inline-flex items-center rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-foreground">
-                        {item.category}
-                      </span>
-                    ) : (
+                  {/* Company */}
+                  <td className="px-4 py-3 text-muted-foreground hidden md:table-cell">
+                    {testimonial.client_company ?? (
                       <span className="text-muted-foreground/50 text-xs italic">—</span>
                     )}
                   </td>
 
-                  {/* Tags */}
-                  <td className="px-4 py-3 hidden xl:table-cell">
-                    {item.tags.length > 0 ? (
-                      <div className="flex flex-wrap gap-1">
-                        {item.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center rounded-md bg-brand/10 px-1.5 py-0.5 text-xs font-medium text-brand"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                        {item.tags.length > 3 && (
-                          <span className="inline-flex items-center rounded-md bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground">
-                            +{item.tags.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    ) : (
-                      <span className="text-muted-foreground/50 text-xs italic">—</span>
-                    )}
+                  {/* Quote preview EN */}
+                  <td className="px-4 py-3 text-muted-foreground hidden lg:table-cell max-w-xs">
+                    <span className="truncate block" title={testimonial.quote_en}>
+                      {testimonial.quote_en.length > 60
+                        ? testimonial.quote_en.slice(0, 60) + "…"
+                        : testimonial.quote_en}
+                    </span>
                   </td>
 
                   {/* Status toggle */}
                   <td className="px-4 py-3">
                     <ToggleActiveButton
-                      itemId={item.id}
-                      isActive={item.is_active}
+                      testimonialId={testimonial.id}
+                      isActive={testimonial.is_active}
                     />
                   </td>
 
@@ -169,14 +136,14 @@ export default async function PortfolioPage() {
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center justify-end gap-3">
                       <Link
-                        href={`/admin/portfolio/${item.id}/edit`}
+                        href={`/admin/testimonials/${testimonial.id}/edit`}
                         className="text-sm font-medium text-brand hover:text-brand-dark transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm"
                       >
                         Edit
                       </Link>
-                      <DeletePortfolioButton
-                        itemId={item.id}
-                        itemTitle={item.title_en}
+                      <DeleteTestimonialButton
+                        testimonialId={testimonial.id}
+                        clientName={testimonial.client_name}
                       />
                     </div>
                   </td>
