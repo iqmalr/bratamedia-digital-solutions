@@ -33,6 +33,32 @@ function detectLocale(request: NextRequest): string {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Admin routes are not locale-prefixed — handle them separately.
+  if (pathname.startsWith("/admin")) {
+    // The login page itself is always accessible without an auth check.
+    if (pathname === "/admin/login") return;
+
+    // First-pass guard: check for a Supabase auth cookie.
+    // The SSR client stores auth in cookies named "sb-<project-ref>-auth-token*".
+    // This is a presence-only check — actual admin role verification happens
+    // server-side in the admin layout via requireAdmin().
+    const hasAuthCookie = request.cookies
+      .getAll()
+      .some(
+        (cookie) =>
+          cookie.name.startsWith("sb-") &&
+          cookie.name.includes("-auth-token"),
+      );
+
+    if (!hasAuthCookie) {
+      const loginUrl = new URL("/admin/login", request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    // Auth cookie present — allow the request through.
+    return;
+  }
+
   // Check whether the pathname already starts with a supported locale segment.
   const pathnameHasLocale = locales.some(
     (locale) =>
