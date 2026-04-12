@@ -1,6 +1,6 @@
 'use server'
 
-import { createServerClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/static'
 import type { TestimonialRow } from '@/types/database'
 
 // ---------------------------------------------------------------------------
@@ -36,7 +36,7 @@ export async function getTestimonials(
   locale: 'id' | 'en'
 ): Promise<GetTestimonialsResult> {
   try {
-    const supabase = await createServerClient()
+    const supabase = createStaticClient()
 
     const { data, error } = await supabase
       .from('testimonials')

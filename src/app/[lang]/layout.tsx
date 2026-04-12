@@ -4,6 +4,8 @@ import { LocaleProvider } from "@/i18n/locale-context";
 import { Navbar } from "@/app/components/navbar";
 import { Footer } from "@/app/components/footer";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 // Pre-render a static page for each supported locale at build time.
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -16,7 +18,6 @@ export async function generateMetadata(props: LayoutProps<"/[lang]">) {
   if (!hasLocale(lang)) return {};
 
   const dict = await getDictionary(lang as Locale);
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
   return {
     title: {
@@ -46,6 +47,14 @@ export async function generateMetadata(props: LayoutProps<"/[lang]">) {
       title: dict.seo.ogTitle,
       description: dict.seo.ogDescription,
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
     other: {
       "theme-color": "#f97316", // orange-500 — Bratamedia primary color
     },
@@ -60,8 +69,41 @@ export default async function LangLayout(props: LayoutProps<"/[lang]">) {
 
   const dict = await getDictionary(lang as Locale);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Bratamedia Digital Solutions",
+    url: `${siteUrl}/${lang}`,
+    description: dict.seo.description,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Jakarta",
+      addressCountry: "ID",
+    },
+    email: dict.contact.info.email,
+    telephone: dict.contact.info.phone,
+    serviceType: [
+      "Web Development",
+      "Mobile App Development",
+      "UI/UX Design",
+      "Digital Marketing",
+      "Cloud Infrastructure",
+      "IT Consulting",
+    ],
+    areaServed: {
+      "@type": "Country",
+      name: "Indonesia",
+    },
+    inLanguage: [lang === "id" ? "id-ID" : "en-US"],
+  };
+
   return (
-    <LocaleProvider initialLocale={lang as Locale}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <LocaleProvider initialLocale={lang as Locale}>
       {/*
        * Skip navigation link — allows keyboard and screen reader users to jump
        * past the fixed navbar directly to the main content area.
@@ -88,5 +130,6 @@ export default async function LangLayout(props: LayoutProps<"/[lang]">) {
         <Footer dict={dict.footer} navLinks={dict.navbar.links} contactInfo={dict.contact.info} />
       </div>
     </LocaleProvider>
+    </>
   );
 }

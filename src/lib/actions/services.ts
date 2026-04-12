@@ -1,6 +1,6 @@
 'use server'
 
-import { createServerClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/static'
 import type { ServiceRow } from '@/types/database'
 
 // ---------------------------------------------------------------------------
@@ -33,7 +33,7 @@ export async function getServices(
   locale: 'id' | 'en'
 ): Promise<GetServicesResult> {
   try {
-    const supabase = await createServerClient()
+    const supabase = createStaticClient()
 
     const { data, error } = await supabase
       .from('services')

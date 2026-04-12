@@ -1,6 +1,6 @@
 'use server'
 
-import { createServerClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/static'
 import type { PortfolioRow } from '@/types/database'
 
 // ---------------------------------------------------------------------------
@@ -68,7 +68,7 @@ export async function getPortfolioItems(
   locale: 'id' | 'en'
 ): Promise<GetPortfolioResult> {
   try {
-    const supabase = await createServerClient()
+    const supabase = createStaticClient()
 
     const { data, error } = await supabase
       .from('portfolio')
@@ -103,7 +103,7 @@ export async function getPortfolioByCategory(
   locale: 'id' | 'en'
 ): Promise<GetPortfolioResult> {
   try {
-    const supabase = await createServerClient()
+    const supabase = createStaticClient()
 
     const { data, error } = await supabase
       .from('portfolio')
