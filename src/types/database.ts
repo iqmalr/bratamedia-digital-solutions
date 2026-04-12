@@ -67,6 +67,26 @@ export interface ContactSubmissionRow {
   created_at: string
 }
 
+export interface ArticleRow {
+  id: string
+  slug: string
+  title_id: string
+  title_en: string
+  excerpt_id: string | null
+  excerpt_en: string | null
+  content_id: Record<string, unknown> | null
+  content_en: Record<string, unknown> | null
+  cover_image_url: string | null
+  category: string | null
+  tags: string[]
+  author_name: string
+  is_published: boolean
+  published_at: string | null
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
 // ---------------------------------------------------------------------------
 // Insert types — shape of a row payload for INSERT operations
 // Omits server-generated fields (id, created_at, updated_at).
@@ -80,6 +100,8 @@ export type TestimonialInsert = Omit<TestimonialRow, 'id' | 'created_at' | 'upda
 
 export type ContactSubmissionInsert = Omit<ContactSubmissionRow, 'id' | 'is_read' | 'created_at'>
 
+export type ArticleInsert = Omit<ArticleRow, 'id' | 'created_at' | 'updated_at'>
+
 // ---------------------------------------------------------------------------
 // Update types — all fields optional except id (which is never updated)
 // ---------------------------------------------------------------------------
@@ -92,6 +114,8 @@ export type TestimonialUpdate = Partial<TestimonialInsert>
 
 /** Admin-updatable fields on contact_submissions (only is_read today). */
 export type ContactSubmissionUpdate = Pick<ContactSubmissionRow, 'is_read'>
+
+export type ArticleUpdate = Partial<ArticleInsert>
 
 // ---------------------------------------------------------------------------
 // Supabase Database interface
@@ -132,6 +156,12 @@ export type Database = {
         Row: ContactSubmissionRow & Record<string, unknown>
         Insert: ContactSubmissionInsert & Record<string, unknown>
         Update: ContactSubmissionUpdate & Record<string, unknown>
+        Relationships: []
+      }
+      articles: {
+        Row: ArticleRow & Record<string, unknown>
+        Insert: ArticleInsert & Record<string, unknown>
+        Update: ArticleUpdate & Record<string, unknown>
         Relationships: []
       }
     }

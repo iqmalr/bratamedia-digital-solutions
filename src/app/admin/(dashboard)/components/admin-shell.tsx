@@ -9,6 +9,7 @@ import {
   FolderOpen,
   MessageSquareQuote,
   Mail,
+  FileText,
   LogOut,
   Menu,
   X,
@@ -22,6 +23,7 @@ import { signOut } from "@/lib/actions/auth";
 
 const navItems = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
+  { label: "Articles", href: "/admin/articles", icon: FileText },
   { label: "Services", href: "/admin/services", icon: Wrench },
   { label: "Portfolio", href: "/admin/portfolio", icon: FolderOpen },
   { label: "Testimonials", href: "/admin/testimonials", icon: MessageSquareQuote },
