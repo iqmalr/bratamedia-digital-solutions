@@ -31,6 +31,8 @@ export interface HeroDictionary {
     primary: string;
     secondary: string;
   };
+  scrollHint: string;
+  scrollAriaLabel: string;
 }
 
 export interface ServiceItem {

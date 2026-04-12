@@ -133,10 +133,10 @@ export function Hero({ dictionary }: HeroProps) {
                 "transition-colors duration-200 hover:text-brand",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm",
               )}
-              aria-label="Scroll to services"
+              aria-label={dictionary.scrollAriaLabel}
             >
               <span className="text-xs font-medium tracking-widest uppercase">
-                Scroll
+                {dictionary.scrollHint}
               </span>
               {/* Animated chevron */}
               <svg

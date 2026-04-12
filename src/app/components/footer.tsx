@@ -2,7 +2,7 @@
 
 import { useLocale } from "@/i18n/locale-context";
 import { Container } from "@/app/components/ui/container";
-import type { FooterDictionary, NavbarDictionary } from "@/i18n/types";
+import type { ContactDictionary, FooterDictionary, NavbarDictionary } from "@/i18n/types";
 import { cn } from "@/lib/utils";
 
 // ---------------------------------------------------------------------------
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 export interface FooterProps {
   dict: FooterDictionary;
   navLinks: NavbarDictionary["links"];
+  contactInfo: ContactDictionary["info"];
 }
 
 // ---------------------------------------------------------------------------
@@ -126,22 +127,22 @@ function FooterQuickLinks({
   );
 }
 
-function FooterContactInfo() {
+function FooterContactInfo({ info }: { info: ContactDictionary["info"] }) {
   return (
     <address className="not-italic flex flex-col gap-2 text-sm text-muted-foreground">
       <a
-        href="mailto:hello@bratamedia.id"
+        href={`mailto:${info.email}`}
         className="hover:text-brand transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm"
       >
-        hello@bratamedia.id
+        {info.email}
       </a>
       <a
-        href="tel:+6281234567890"
+        href={`tel:${info.phone.replace(/\s/g, "")}`}
         className="hover:text-brand transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm"
       >
-        +62 812 3456 7890
+        {info.phone}
       </a>
-      <span>Jakarta, Indonesia</span>
+      <span>{info.address}</span>
     </address>
   );
 }
@@ -237,7 +238,7 @@ function FooterColumnHeading({ children }: { children: React.ReactNode }) {
 // Main Footer
 // ---------------------------------------------------------------------------
 
-export function Footer({ dict, navLinks }: FooterProps) {
+export function Footer({ dict, navLinks, contactInfo }: FooterProps) {
   const { locale } = useLocale();
 
   const columnLabels = {
@@ -268,7 +269,7 @@ export function Footer({ dict, navLinks }: FooterProps) {
             {/* Column 3 — Contact info */}
             <div>
               <FooterColumnHeading>{columnLabels.contact}</FooterColumnHeading>
-              <FooterContactInfo />
+              <FooterContactInfo info={contactInfo} />
             </div>
 
             {/* Column 4 — Social media */}

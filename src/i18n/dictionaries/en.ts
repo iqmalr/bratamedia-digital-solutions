@@ -10,7 +10,7 @@ const en: Dictionary = {
     },
     languageToggle: {
       label: "Language",
-      switchTo: "Indonesia",
+      switchTo: "Bahasa Indonesia",
     },
     openMenu: "Open menu",
     closeMenu: "Close menu",
@@ -19,13 +19,15 @@ const en: Dictionary = {
   },
 
   hero: {
-    headline: "The Best Digital Solutions for Your Business",
+    headline: "Turn Your Business Ideas into Digital Reality",
     subheadline:
-      "We help your business grow with innovative technology solutions, from web development to mobile applications.",
+      "From custom websites to mobile apps, we build digital products that create measurable growth for your business.",
     cta: {
       primary: "Get Started",
       secondary: "View Portfolio",
     },
+    scrollHint: "Scroll",
+    scrollAriaLabel: "Scroll to services",
   },
 
   services: {
@@ -69,7 +71,7 @@ const en: Dictionary = {
   portfolio: {
     title: "Our Portfolio",
     subtitle:
-      "A selection of our best projects delivered alongside our clients.",
+      "Real projects, real results. Work that helped our clients grow their businesses.",
     viewProject: "View Project",
     viewAll: "View All Projects",
   },
@@ -77,11 +79,11 @@ const en: Dictionary = {
   testimonials: {
     title: "What Our Clients Say",
     subtitle:
-      "Client satisfaction is our top priority. Here are their experiences working with us.",
+      "Client trust is our measure of success. Here is what it is like to work with Bratamedia.",
   },
 
   contact: {
-    title: "Contact Us",
+    title: "Let's Work Together",
     subtitle:
       "Have a question or want to discuss your project? We are ready to help.",
     form: {
@@ -121,7 +123,7 @@ const en: Dictionary = {
 
   footer: {
     copyright: "© {year} Bratamedia Digital Solutions. All rights reserved.",
-    tagline: "Digital solutions for your business.",
+    tagline: "Building digital products that help your business grow.",
     links: {
       privacy: "Privacy Policy",
       terms: "Terms & Conditions",
@@ -135,10 +137,10 @@ const en: Dictionary = {
   seo: {
     title: "Bratamedia Digital Solutions — Indonesian Software House",
     description:
-      "Bratamedia Digital Solutions is an Indonesian software house providing web development, mobile apps, UI/UX design, and IT consulting services.",
-    ogTitle: "Bratamedia Digital Solutions",
+      "Bratamedia Digital Solutions is a trusted Indonesian software house providing custom web development, mobile apps, UI/UX design, and IT consulting.",
+    ogTitle: "Bratamedia — Trusted Software House in Indonesia",
     ogDescription:
-      "The best digital solutions for your business. Web development, mobile, design, and IT consulting.",
+      "Bratamedia is a trusted Indonesian software house. We build custom websites, mobile apps, and cloud solutions that drive real business growth — from concept to launch.",
   },
 };
 

@@ -19,13 +19,15 @@ const id: Dictionary = {
   },
 
   hero: {
-    headline: "Solusi Digital Terbaik untuk Bisnis Anda",
+    headline: "Wujudkan Ide Bisnis Anda dengan Teknologi yang Tepat",
     subheadline:
-      "Kami membantu bisnis Anda tumbuh dengan solusi teknologi yang inovatif, dari pengembangan web hingga aplikasi mobile.",
+      "Dari website hingga aplikasi mobile, kami membangun produk digital yang mendorong pertumbuhan nyata untuk bisnis Anda.",
     cta: {
       primary: "Mulai Sekarang",
       secondary: "Lihat Portfolio",
     },
+    scrollHint: "Gulir",
+    scrollAriaLabel: "Gulir ke layanan",
   },
 
   services: {
@@ -69,7 +71,7 @@ const id: Dictionary = {
   portfolio: {
     title: "Portfolio Kami",
     subtitle:
-      "Beberapa proyek unggulan yang telah kami kerjakan bersama klien kami.",
+      "Proyek nyata, hasil nyata. Inilah karya kami yang membantu bisnis klien berkembang.",
     viewProject: "Lihat Proyek",
     viewAll: "Lihat Semua Proyek",
   },
@@ -77,11 +79,11 @@ const id: Dictionary = {
   testimonials: {
     title: "Apa Kata Klien Kami",
     subtitle:
-      "Kepuasan klien adalah prioritas utama kami. Berikut pengalaman mereka bekerja bersama kami.",
+      "Kepercayaan klien adalah tolok ukur keberhasilan kami. Berikut pengalaman mereka bekerja bersama Bratamedia.",
   },
 
   contact: {
-    title: "Hubungi Kami",
+    title: "Mari Berkolaborasi",
     subtitle:
       "Ada pertanyaan atau ingin berdiskusi tentang proyek Anda? Kami siap membantu.",
     form: {
@@ -121,7 +123,7 @@ const id: Dictionary = {
 
   footer: {
     copyright: "© {year} Bratamedia Digital Solutions. Hak cipta dilindungi.",
-    tagline: "Solusi digital untuk bisnis Anda.",
+    tagline: "Membangun produk digital yang membuat bisnis Anda berkembang.",
     links: {
       privacy: "Kebijakan Privasi",
       terms: "Syarat & Ketentuan",
@@ -136,9 +138,9 @@ const id: Dictionary = {
     title: "Bratamedia Digital Solutions — Software House Indonesia",
     description:
       "Bratamedia Digital Solutions adalah software house Indonesia yang menyediakan layanan pengembangan web, aplikasi mobile, desain UI/UX, dan konsultasi IT.",
-    ogTitle: "Bratamedia Digital Solutions",
+    ogTitle: "Bratamedia Digital Solutions — Software House Indonesia",
     ogDescription:
-      "Solusi digital terbaik untuk bisnis Anda. Pengembangan web, mobile, desain, dan konsultasi IT.",
+      "Bratamedia adalah software house Indonesia terpercaya. Kami membangun website, aplikasi mobile, dan solusi cloud yang mendorong pertumbuhan bisnis Anda — dari konsep hingga peluncuran.",
   },
 };
 

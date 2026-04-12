@@ -85,7 +85,7 @@ export default async function LangLayout(props: LayoutProps<"/[lang]">) {
        */}
       <div className="flex min-h-screen flex-col pt-16">
         <main id="main-content" className="flex-1">{props.children}</main>
-        <Footer dict={dict.footer} navLinks={dict.navbar.links} />
+        <Footer dict={dict.footer} navLinks={dict.navbar.links} contactInfo={dict.contact.info} />
       </div>
     </LocaleProvider>
   );
