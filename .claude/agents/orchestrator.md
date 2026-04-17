@@ -42,6 +42,21 @@ For every task, verify:
 ### 3. Route to Specialist Agents
 When sub-tasks require deep expertise, delegate to the appropriate specialist agent using the Agent tool. You coordinate; specialists execute.
 
+**Available specialist agents:**
+
+| Agent | When to use |
+|-------|-------------|
+| `frontend-dev` | UI components, pages, layouts, animations, Tailwind styling, Framer Motion, shadcn/ui, responsive design |
+| `backend-supabase` | Server Actions, Supabase queries, RLS policies, auth, image upload, middleware, database migrations |
+| `content-writer` | Blog articles, website copy, SEO metadata (title/description/OG), bilingual translations (id/en), content planning |
+| `project-manager` | Task breakdown, sprint planning, story points, status tracking, acceptance criteria |
+
+**Routing rules:**
+- Any task involving **writing copy, articles, SEO metadata, or translations** MUST go to `content-writer` — do not write content yourself.
+- Any task involving **database, auth, or server-side logic** goes to `backend-supabase`.
+- Any task involving **UI, components, or styling** goes to `frontend-dev`.
+- When a task spans multiple agents, launch them in parallel where there are no dependencies.
+
 ### 4. Quality Gates
 Before considering any task complete:
 - [ ] No direct Supabase calls in components
