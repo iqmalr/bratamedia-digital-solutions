@@ -15,13 +15,17 @@ import { Container } from "@/app/components/ui/container";
 
 interface NavLink {
   key: keyof NavbarDictionary["links"];
+  /** Anchor href or absolute path. Page links use a locale-prefixed path resolved at render time. */
   href: string;
+  /** When true, renders a Next.js Link for page navigation instead of an anchor scroll. */
+  isPageLink?: boolean;
 }
 
 const NAV_LINKS: NavLink[] = [
   { key: "services", href: "#services" },
   { key: "portfolio", href: "#portfolio" },
   { key: "testimonials", href: "#testimonials" },
+  { key: "blog", href: "/blog", isPageLink: true },
   { key: "contact", href: "#contact" },
 ];
 
@@ -95,6 +99,19 @@ interface NavLinksProps {
 }
 
 function NavLinks({ links, onLinkClick, orientation = "horizontal" }: NavLinksProps) {
+  const { locale } = useLocale();
+
+  const linkClassName = cn(
+    "relative rounded-md px-3 py-2 text-sm font-medium",
+    "text-muted-foreground hover:text-foreground",
+    "transition-colors duration-150",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand",
+    // Underline accent on hover
+    "after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px]",
+    "after:origin-left after:scale-x-0 after:rounded-full after:bg-brand",
+    "after:transition-transform after:duration-200 hover:after:scale-x-100",
+  );
+
   return (
     <ul
       role="list"
@@ -104,25 +121,31 @@ function NavLinks({ links, onLinkClick, orientation = "horizontal" }: NavLinksPr
           : "flex flex-col gap-1",
       )}
     >
-      {NAV_LINKS.map(({ key, href }) => (
+      {NAV_LINKS.map(({ key, href, isPageLink }) => (
         <li key={key}>
-          <a
-            href={href}
-            onClick={onLinkClick}
-            className={cn(
-              "relative rounded-md px-3 py-2 text-sm font-medium",
-              "text-muted-foreground hover:text-foreground",
-              "transition-colors duration-150",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand",
-              // Underline accent on hover
-              "after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px]",
-              "after:origin-left after:scale-x-0 after:rounded-full after:bg-brand",
-              "after:transition-transform after:duration-200 hover:after:scale-x-100",
-              orientation === "vertical" && "block w-full px-4 py-3 text-base",
-            )}
-          >
-            {links[key]}
-          </a>
+          {isPageLink ? (
+            <Link
+              href={`/${locale}${href}`}
+              onClick={onLinkClick}
+              className={cn(
+                linkClassName,
+                orientation === "vertical" && "block w-full px-4 py-3 text-base",
+              )}
+            >
+              {links[key]}
+            </Link>
+          ) : (
+            <a
+              href={href}
+              onClick={onLinkClick}
+              className={cn(
+                linkClassName,
+                orientation === "vertical" && "block w-full px-4 py-3 text-base",
+              )}
+            >
+              {links[key]}
+            </a>
+          )}
         </li>
       ))}
     </ul>

@@ -125,7 +125,7 @@ interface PortfolioCardProps {
 
 function PortfolioCard({ item, viewProjectLabel }: PortfolioCardProps) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
       {/* Image area */}
       <div className="overflow-hidden">
         {item.image_url ? (
@@ -204,7 +204,7 @@ export function PortfolioSection({ dictionary, items }: PortfolioSectionProps) {
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {items.map((item) => (
-          <StaggerItem key={item.id} role="listitem">
+          <StaggerItem key={item.id} role="listitem" className="h-full">
             <PortfolioCard item={item} viewProjectLabel={viewProject} />
           </StaggerItem>
         ))}

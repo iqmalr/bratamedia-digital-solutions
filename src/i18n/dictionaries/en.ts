@@ -6,6 +6,7 @@ const en: Dictionary = {
       services: "Services",
       portfolio: "Portfolio",
       testimonials: "Testimonials",
+      blog: "Blog",
       contact: "Contact",
     },
     languageToggle: {
@@ -80,6 +81,12 @@ const en: Dictionary = {
     title: "What Our Clients Say",
     subtitle:
       "Client trust is our measure of success. Here is what it is like to work with Bratamedia.",
+  },
+
+  blog: {
+    title: "Blog",
+    subtitle: "Latest articles and insights from our team",
+    viewAll: "View All Articles",
   },
 
   contact: {

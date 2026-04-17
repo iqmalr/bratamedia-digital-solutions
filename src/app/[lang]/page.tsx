@@ -9,6 +9,7 @@ import { Hero } from "@/app/components/hero";
 import { ServicesSection } from "@/app/components/services";
 import { PortfolioSection } from "@/app/components/portfolio";
 import { TestimonialsSection } from "@/app/components/testimonials";
+import { BlogSection } from "@/app/components/blog-section";
 import { ContactSection } from "@/app/components/contact";
 
 export default async function HomePage(props: PageProps<"/[lang]">) {
@@ -36,6 +37,7 @@ export default async function HomePage(props: PageProps<"/[lang]">) {
       <ServicesSection dictionary={dict} services={services} />
       <PortfolioSection dictionary={dict} items={portfolio} />
       <TestimonialsSection dictionary={dict} testimonials={testimonials} />
+      <BlogSection lang={lang} locale={locale} dictionary={dict} />
       <ContactSection dictionary={dict.contact} />
     </>
   );

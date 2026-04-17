@@ -24,41 +24,59 @@ VALUES ('avatars', 'avatars', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------------------------
--- Policies: portfolio-images
+-- Policies (idempotent — skip if already exists)
 -- ---------------------------------------------------------------------------
 
-CREATE POLICY "Public read portfolio-images"
-  ON storage.objects FOR SELECT
-  USING (bucket_id = 'portfolio-images');
+DO $$ BEGIN
 
-CREATE POLICY "Admin upload portfolio-images"
-  ON storage.objects FOR INSERT
-  WITH CHECK (bucket_id = 'portfolio-images' AND public.is_admin());
+-- portfolio-images
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public read portfolio-images' AND tablename = 'objects') THEN
+  CREATE POLICY "Public read portfolio-images"
+    ON storage.objects FOR SELECT
+    USING (bucket_id = 'portfolio-images');
+END IF;
 
-CREATE POLICY "Admin update portfolio-images"
-  ON storage.objects FOR UPDATE
-  USING (bucket_id = 'portfolio-images' AND public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Admin upload portfolio-images' AND tablename = 'objects') THEN
+  CREATE POLICY "Admin upload portfolio-images"
+    ON storage.objects FOR INSERT
+    WITH CHECK (bucket_id = 'portfolio-images' AND public.is_admin());
+END IF;
 
-CREATE POLICY "Admin delete portfolio-images"
-  ON storage.objects FOR DELETE
-  USING (bucket_id = 'portfolio-images' AND public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Admin update portfolio-images' AND tablename = 'objects') THEN
+  CREATE POLICY "Admin update portfolio-images"
+    ON storage.objects FOR UPDATE
+    USING (bucket_id = 'portfolio-images' AND public.is_admin());
+END IF;
 
--- ---------------------------------------------------------------------------
--- Policies: avatars
--- ---------------------------------------------------------------------------
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Admin delete portfolio-images' AND tablename = 'objects') THEN
+  CREATE POLICY "Admin delete portfolio-images"
+    ON storage.objects FOR DELETE
+    USING (bucket_id = 'portfolio-images' AND public.is_admin());
+END IF;
 
-CREATE POLICY "Public read avatars"
-  ON storage.objects FOR SELECT
-  USING (bucket_id = 'avatars');
+-- avatars
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Public read avatars' AND tablename = 'objects') THEN
+  CREATE POLICY "Public read avatars"
+    ON storage.objects FOR SELECT
+    USING (bucket_id = 'avatars');
+END IF;
 
-CREATE POLICY "Admin upload avatars"
-  ON storage.objects FOR INSERT
-  WITH CHECK (bucket_id = 'avatars' AND public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Admin upload avatars' AND tablename = 'objects') THEN
+  CREATE POLICY "Admin upload avatars"
+    ON storage.objects FOR INSERT
+    WITH CHECK (bucket_id = 'avatars' AND public.is_admin());
+END IF;
 
-CREATE POLICY "Admin update avatars"
-  ON storage.objects FOR UPDATE
-  USING (bucket_id = 'avatars' AND public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Admin update avatars' AND tablename = 'objects') THEN
+  CREATE POLICY "Admin update avatars"
+    ON storage.objects FOR UPDATE
+    USING (bucket_id = 'avatars' AND public.is_admin());
+END IF;
 
-CREATE POLICY "Admin delete avatars"
-  ON storage.objects FOR DELETE
-  USING (bucket_id = 'avatars' AND public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Admin delete avatars' AND tablename = 'objects') THEN
+  CREATE POLICY "Admin delete avatars"
+    ON storage.objects FOR DELETE
+    USING (bucket_id = 'avatars' AND public.is_admin());
+END IF;
+
+END $$;

@@ -8,6 +8,7 @@ export interface NavbarDictionary {
     services: string;
     portfolio: string;
     testimonials: string;
+    blog: string;
     contact: string;
   };
   languageToggle: {
@@ -63,6 +64,12 @@ export interface PortfolioDictionary {
 export interface TestimonialsDictionary {
   title: string;
   subtitle: string;
+}
+
+export interface BlogDictionary {
+  title: string;
+  subtitle: string;
+  viewAll: string;
 }
 
 export interface ContactDictionary {
@@ -127,6 +134,7 @@ export interface Dictionary {
   services: ServicesDictionary;
   portfolio: PortfolioDictionary;
   testimonials: TestimonialsDictionary;
+  blog: BlogDictionary;
   contact: ContactDictionary;
   footer: FooterDictionary;
   seo: SeoMetadataDictionary;

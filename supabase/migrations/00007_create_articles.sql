@@ -27,9 +27,16 @@ CREATE TABLE IF NOT EXISTS public.articles (
   updated_at    timestamptz NOT NULL DEFAULT now()
 );
 
-CREATE TRIGGER articles_set_updated_at
-  BEFORE UPDATE ON public.articles
-  FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+-- Trigger (idempotent)
+DO $$ BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_trigger WHERE tgname = 'articles_set_updated_at'
+  ) THEN
+    CREATE TRIGGER articles_set_updated_at
+      BEFORE UPDATE ON public.articles
+      FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+  END IF;
+END $$;
 
 COMMENT ON TABLE  public.articles                IS 'Blog articles with bilingual content stored as Tiptap JSON.';
 COMMENT ON COLUMN public.articles.slug           IS 'URL-safe identifier, unique across all articles.';
@@ -40,34 +47,41 @@ COMMENT ON COLUMN public.articles.is_published   IS 'When false the article is a
 COMMENT ON COLUMN public.articles.published_at   IS 'Timestamp when the article was first published. Set on publish.';
 
 -- ---------------------------------------------------------------------------
--- RLS policies
+-- RLS policies (idempotent)
 -- ---------------------------------------------------------------------------
 ALTER TABLE public.articles ENABLE ROW LEVEL SECURITY;
 
--- Public read: anyone can see published articles
-CREATE POLICY "articles_select_published"
-  ON public.articles
-  FOR SELECT
-  USING (is_published = true);
+DO $$ BEGIN
 
--- Admin full CRUD
-CREATE POLICY "articles_select_admin"
-  ON public.articles
-  FOR SELECT
-  USING (public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'articles_select_published' AND tablename = 'articles') THEN
+  CREATE POLICY "articles_select_published"
+    ON public.articles FOR SELECT
+    USING (is_published = true);
+END IF;
 
-CREATE POLICY "articles_insert_admin"
-  ON public.articles
-  FOR INSERT
-  WITH CHECK (public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'articles_select_admin' AND tablename = 'articles') THEN
+  CREATE POLICY "articles_select_admin"
+    ON public.articles FOR SELECT
+    USING (public.is_admin());
+END IF;
 
-CREATE POLICY "articles_update_admin"
-  ON public.articles
-  FOR UPDATE
-  USING (public.is_admin())
-  WITH CHECK (public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'articles_insert_admin' AND tablename = 'articles') THEN
+  CREATE POLICY "articles_insert_admin"
+    ON public.articles FOR INSERT
+    WITH CHECK (public.is_admin());
+END IF;
 
-CREATE POLICY "articles_delete_admin"
-  ON public.articles
-  FOR DELETE
-  USING (public.is_admin());
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'articles_update_admin' AND tablename = 'articles') THEN
+  CREATE POLICY "articles_update_admin"
+    ON public.articles FOR UPDATE
+    USING (public.is_admin())
+    WITH CHECK (public.is_admin());
+END IF;
+
+IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'articles_delete_admin' AND tablename = 'articles') THEN
+  CREATE POLICY "articles_delete_admin"
+    ON public.articles FOR DELETE
+    USING (public.is_admin());
+END IF;
+
+END $$;

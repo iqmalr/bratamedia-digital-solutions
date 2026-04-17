@@ -6,6 +6,7 @@ const id: Dictionary = {
       services: "Layanan",
       portfolio: "Portfolio",
       testimonials: "Testimoni",
+      blog: "Blog",
       contact: "Kontak",
     },
     languageToggle: {
@@ -80,6 +81,12 @@ const id: Dictionary = {
     title: "Apa Kata Klien Kami",
     subtitle:
       "Kepercayaan klien adalah tolok ukur keberhasilan kami. Berikut pengalaman mereka bekerja bersama Bratamedia.",
+  },
+
+  blog: {
+    title: "Blog",
+    subtitle: "Artikel dan wawasan terbaru dari tim kami",
+    viewAll: "Lihat Semua Artikel",
   },
 
   contact: {
