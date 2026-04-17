@@ -22,13 +22,34 @@ Example: "Bratamedia — Trusted Software House in Indonesia" (48 chars)
 
 These primary keywords are claimed by the five geo-targeted articles in Batch 1. Do not use them as primary keywords elsewhere.
 
-| Article slug | Primary keyword (id) | Primary keyword (en) |
-|---|---|---|
-| `jasa-pembuatan-website-wonosobo` | jasa membuat web wonosobo | web development wonosobo |
-| `jasa-pembuatan-website-semarang` | jasa membuat web semarang | web development semarang |
-| `jasa-pembuatan-website-jawa-tengah` | jasa membuat web jawa tengah | web development central java |
-| `jasa-pembuatan-website-indonesia` | jasa membuat web indonesia | web development services indonesia |
-| `jasa-pembuatan-website-internasional` | jasa pembuatan web internasional | offshore web development indonesia |
+| Article slug | Primary keyword (id) | Primary keyword (en) | Status |
+|---|---|---|---|
+| `jasa-pembuatan-website-wonosobo` | jasa membuat web wonosobo | web development wonosobo | **PUBLISHED** (Article 01) |
+| `jasa-pembuatan-website-semarang` | jasa membuat web semarang | web development semarang | **PUBLISHED** (Article 02) |
+| `jasa-pembuatan-website-jawa-tengah` | jasa membuat web jawa tengah | web development central java | **DRAFT** (Article 03) |
+| `jasa-pembuatan-website-indonesia` | jasa membuat web indonesia | web development services indonesia | reserved |
+| `jasa-pembuatan-website-internasional` | jasa pembuatan web internasional | offshore web development indonesia | reserved |
+
+## Article 01 — Wonosobo Secondary Keywords (Deployed)
+
+- **id secondaries**: jasa website wonosobo, website bisnis wonosobo, harga buat website wonosobo
+- **en secondaries**: website development wonosobo, business website wonosobo, professional web developer wonosobo
+- **Meta title (id)**: "Jasa Pembuatan Website Profesional di Wonosobo" (50 chars)
+- **Meta title (en)**: "Professional Web Development Services in Wonosobo" (51 chars)
+
+## Article 02 — Semarang Secondary Keywords (Deployed)
+
+- **id secondaries**: jasa website semarang, website company profile semarang, buat website toko online semarang
+- **en secondaries**: website development semarang, company profile website semarang, online store website semarang
+- **Meta title (id)**: "Jasa Pembuatan Website Profesional di Semarang" (50 chars)
+- **Meta title (en)**: "Professional Website Development Services in Semarang" (54 chars)
+
+## Article 03 — Jawa Tengah Secondary Keywords (Deployed)
+
+- **id secondaries**: jasa website jawa tengah, buat website di solo, jasa web purwokerto
+- **en secondaries**: website development central java, web developer solo, web development purwokerto
+- **Meta title (id)**: "Jasa Pembuatan Website Jawa Tengah | Bratamedia" (50 chars)
+- **Meta title (en)**: "Web Development Services in Central Java | Bratamedia" (54 chars)
 
 ## Notes for Future Pages
 - Blog articles: choose distinct long-tail keywords to avoid competing with the homepage or each other
