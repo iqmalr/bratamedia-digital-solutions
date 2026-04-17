@@ -3,10 +3,17 @@ export const revalidate = 3600;
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { generateHTML } from "@tiptap/core";
+import { generateHTML } from "@tiptap/html/server";
 import StarterKit from "@tiptap/starter-kit";
-import { Link as TiptapLink } from "@tiptap/extension-link";
+import TiptapLink from "@tiptap/extension-link";
 import TiptapImage from "@tiptap/extension-image";
+import TextAlign from "@tiptap/extension-text-align";
+import { TextStyle } from "@tiptap/extension-text-style";
+import Underline from "@tiptap/extension-underline";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
+import { Color } from "@tiptap/extension-color";
+import Highlight from "@tiptap/extension-highlight";
 import { hasLocale, type Locale } from "@/i18n/index";
 import { locales } from "@/i18n/config";
 import { getArticleBySlug } from "@/lib/actions/articles";
@@ -40,10 +47,38 @@ export async function generateStaticParams() {
  */
 function renderContent(content: Record<string, unknown> | null): string {
   if (!content) return "";
+
+  // If content was stored as a JSON string, parse it
+  let doc = content;
+  if (typeof doc === "string") {
+    try {
+      doc = JSON.parse(doc) as Record<string, unknown>;
+    } catch {
+      return "";
+    }
+  }
+
   try {
+    // Extensions must match those used in the admin Tiptap editor.
+    // StarterKit v3 may bundle some extensions, so disable duplicates.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return generateHTML(content as any, [StarterKit, TiptapLink, TiptapImage]);
-  } catch {
+    const html = generateHTML(doc as any, [
+      StarterKit.configure({
+        heading: { levels: [1, 2, 3, 4] },
+      }),
+      TiptapLink.configure({ openOnClick: false }),
+      TiptapImage,
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
+      TextStyle,
+      Underline,
+      Subscript,
+      Superscript,
+      Color,
+      Highlight.configure({ multicolor: true }),
+    ]);
+    return html;
+  } catch (err) {
+    console.error("[renderContent] generateHTML error:", err);
     return "";
   }
 }
@@ -113,7 +148,8 @@ export default async function ArticleDetailPage(props: {
   const article = result.data;
   const contentHtml = renderContent(article.content);
   const backHref = `/${lang}/blog`;
-
+  console.log('result', result);
+  console.log('article', article);
   return (
     <div className="py-12 sm:py-16">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
