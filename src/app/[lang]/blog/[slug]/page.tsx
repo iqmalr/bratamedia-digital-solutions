@@ -8,7 +8,27 @@ import StarterKit from "@tiptap/starter-kit";
 import { Link as TiptapLink } from "@tiptap/extension-link";
 import TiptapImage from "@tiptap/extension-image";
 import { hasLocale, type Locale } from "@/i18n/index";
+import { locales } from "@/i18n/config";
 import { getArticleBySlug } from "@/lib/actions/articles";
+import { createStaticClient } from "@/lib/supabase/static";
+
+// ---------------------------------------------------------------------------
+// SSG — pre-build all published article pages at build time
+// ---------------------------------------------------------------------------
+
+export async function generateStaticParams() {
+  const supabase = createStaticClient();
+  const { data } = await supabase
+    .from("articles")
+    .select("slug")
+    .eq("is_published", true);
+
+  if (!data) return [];
+
+  return data.flatMap((article) =>
+    locales.map((lang) => ({ lang, slug: article.slug }))
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
